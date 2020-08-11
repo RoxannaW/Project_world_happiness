@@ -25,14 +25,14 @@ def Filter_dataframe(df):
         df.set_index("Country", inplace=True)
         df = df[['Overall rank', 'Score', 'GDP per capita', 'Social support',
                         'Healthy life expectancy', 'Freedom to make life choices', 'Generosity',
-                        'Perceptions of corruption', 'Year']]
+                        'Perceptions of corruption']]
                      
         return df
 
 # adding column Year to each dataframe
 def Add_year(df, year):
 
-    df["Year"] = year
+    df.insert(0, 'Year', year)
 
     print("done")
     return df
@@ -50,10 +50,20 @@ def Clean_data_peace_index(df):
     print("done")
     return df
 
-def Clean_data_unemployment(df):
-    df = df[['ref_area.label', 'time', 'obs_value']]
-    df.rename(columns={'ref_area.label':'Country', 'time':'Year', 'obs_value':'Unemployment_rate'}, inplace=True)
-    df.set_index("Country", inplace=True)
-    
-    print("done")
-    
+
+
+def clean_data_unemployment_rate(x):
+    df_unemployment = x[['ref_area.label', 'time', 'obs_value']]
+    df_unemployment.rename(columns={'ref_area.label':'Country', 'time':'Year', 'obs_value':'Unemployment_rate'}, inplace=True)
+    df_unemployment.set_index("Country", inplace=True)
+    df_unemployment = df_unemployment.pivot_table(values='Unemployment_rate', index=df_unemployment.index, columns='Year', aggfunc='first') 
+    return df_unemployment
+
+
+def join_df(df, df1, df2):
+    complete_df = df.join(df1)
+    complete_df = complete_df.join(df2)
+    complete_df.rename(columns={ complete_df.columns[-1]: "Unemployment rate", complete_df.columns[-2]: "Peace index"}, inplace=True)
+
+    print("Dataframes are joined")
+    return complete_df
