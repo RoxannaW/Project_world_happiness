@@ -1,3 +1,14 @@
+import pandas as pd
+import numpy as np
+import os, sys
+from flask import Flask, render_template, redirect, request, jsonify 
+import missingno
+import time
+import random
+import json
+import seaborn as sns
+import matplotlib.pyplot  as plt
+
 # Renaming columns so all dataframes have the same columns names. 
 def Change_columns(df):
     try:
@@ -67,3 +78,27 @@ def join_df(df, df1, df2):
 
     print("Dataframes are joined")
     return complete_df
+
+
+def to_datetime(df):
+    df["Year"] = pd.to_datetime(df["Year"], format='%Y').dt.year
+    print("Done")
+
+def none_values(df):
+
+    if len(df[df.isnull().any(axis=1)] != 0):
+        print("\nPreview of data with null values:")
+        display(df[df.isnull().any(axis=1)].head(3))
+        missingno.matrix(df)
+        plt.show()
+
+def drop_column(df):
+    df = df.drop("Unemployment rate", axis=1)
+    return df
+
+def show_duplicates(df):
+    if len(df[df.duplicated()]) > 0:
+        print("\n***Number of duplicated entries: ", len(df[df.duplicated()]))
+        display(df[df.duplicated(keep=False)].sort_values(by=list(df.columns)).head())
+    else:
+        print("\nNo duplicated entries found")
