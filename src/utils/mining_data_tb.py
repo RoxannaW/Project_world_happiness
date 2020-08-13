@@ -96,9 +96,21 @@ def drop_column(df):
     df = df.drop("Unemployment rate", axis=1)
     return df
 
+def fill_none_values(df):
+    df["Peace index"].fillna(df["Peace index"].mean(), inplace=True)
+    return df
+
 def show_duplicates(df):
     if len(df[df.duplicated()]) > 0:
         print("\n***Number of duplicated entries: ", len(df[df.duplicated()]))
         display(df[df.duplicated(keep=False)].sort_values(by=list(df.columns)).head())
     else:
         print("\nNo duplicated entries found")
+
+def change_score_rank(df):
+    df["Score"] = df["Score"] - df["Peace index"]
+    df["Overall rank"] = df["Score"].rank(ascending=False) 
+    df["Overall rank"] = df["Overall rank"].astype('int64')
+    df = df.sort_values("Score", ascending=False, inplace=True)
+    print("Score and rank updated")
+    return df
