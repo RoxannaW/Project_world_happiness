@@ -1,5 +1,5 @@
 
-### nog aanpassen want dit is van het groepsproject corona!!
+### Api to return the dataframe in Json format of all years combined when token_id is put in and returning only dataframe of specific year when year is provided as argument.
 
 
 import os, sys
@@ -21,46 +21,42 @@ def default():
     return "Hi, there :)"
 
 
-@app.route('/get/Token', methods=['GET'])
-def get_token():
-    group_id_number = None
-    N = "C133"
-   
-    if 'group_id' in request.args:
-        group_id_number = str(request.args['group_id'])
-    
-    if group_id_number == N:
-        return "{'token': C5221570662008902e}" 
-        
-
-    else:
-         return "This is a message of error" + "<br>" + "<br>" + str(request.args)
-
-#opening json file and converting to dictionary "..\\utils\Mean_per_day.json"
-#path = "Roxanna\\Resources\\mean.json"
-#path = "C:\\Users\\Roxan\\OneDrive\\Documentos\\Repo_August_project\\Project_August_Corona\\Roxanna\\Resources\\mean.json"
-#with open(path, "r+") as outfile:
-    #json_mean_total_cases = json.load(outfile)       
-
-#json_mean_total_cases = open_json(path)
-
-
-@app.route('/get/Json', methods=['GET'])
+@app.route('/get/Data', methods=['GET'])
 def get():
     token_id_number = None
-    S =  "C5221570662008902e" 
-    path = root_path + "\\Resources\\mean.json" 
-    #direction to where json is saved.
-    #example, still have to calculate the true value of S
-    
+    year_id = None
+    S =  "Y7291372H" 
+    path = root_path + "\\Resources\\data_all_years.json"
+    path_2015 = root_path + "\\Resources\\data_2015.json"
+    path_2016 = root_path + "\\Resources\\data_2016.json" 
+    path_2017 = root_path + "\\Resources\\data_2017.json"
+    path_2018 = root_path + "\\Resources\\data_2018.json"
+    path_2019 = root_path + "\\Resources\\data_2019.json"
+     
+    #direction to where json is saved.    
     
     if 'token_id' in request.args:
         token_id_number = str(request.args['token_id'])
     
-    if token_id_number == S:
+        if token_id_number == S:
 
-        return open_json(path)
-        #Have to add the information that is assigned to our group 
+            return open_json(path)
+            #Have to add the information that is assigned to our group 
+
+    if 'year' in request.args:
+        year_id = str(request.args['year'])
+        if year_id == '2015':
+            return open_json(path_2015)
+        elif year_id == '2016':
+            return open_json(path_2016)
+        elif year_id == '2017':
+            return open_json(path_2017)
+        elif year_id == '2018':
+            return open_json(path_2018)
+        elif year_id == '2019':
+            return open_json(path_2019)
+
+
 
     else:
          return "This is a message of error" + "<br>" + "<br>" + str(request.args)

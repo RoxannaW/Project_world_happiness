@@ -11,10 +11,25 @@ import json
 root_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(root_path)
 
-def data_to_json(Data):
-    Data.to_json(str(Data)+".json")
 
-def dfjson(df):
-    mean_per_day = df.groupby("date")["total_cases"].mean() #calculating mean per day of all countries
-    mean_per_day.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Repo_August_project\\Project_August_Corona\\Roxanna\\Resources\\mean.json") #converting to Json mean
-    return "se ha cargado el archivo mean.json en el path"
+
+def dfjson(df, year):
+    if year == 2015:
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_2015.json") #converting to Json mean
+        return "File data_2015.json has been loaded"
+    elif year == 2016:
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_2016.json") #converting to Json mean
+        return "File data_2016.json has been loaded"
+    elif year == 2017:
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_2017.json") #converting to Json mean
+        return "File data_2017.json has been loaded"
+    elif year == 2018:
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_2018.json") #converting to Json mean
+        return "File data_2018.json has been loaded"
+    elif year == 2019:
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_2019.json") #converting to Json mean
+        return "File data_2019.json has been loaded"
+    elif year == "All":
+        df.to_json("C:\\Users\\Roxan\\OneDrive\\Documentos\\Project_world_happiness\\Project_world_happiness\\Resources\\data_all_years.json") #converting to Json mean
+        return "File data_all_years.json has been loaded"
+

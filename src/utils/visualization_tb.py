@@ -4,6 +4,11 @@ import seaborn as sns
 import matplotlib.pyplot  as plt
 from IPython.display import Image
 import plotly.express as px
+import plotly.graph_objs as go
+from plotly.offline import plot
+from bubbly.bubbly import bubbleplot
+import plotly.offline as py
+from plotly.offline import init_notebook_mode, iplot
 
 os.path.abspath('')
 root_path = os.path.dirname(os.path.abspath(''))

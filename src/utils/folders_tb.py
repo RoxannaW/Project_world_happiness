@@ -1,5 +1,4 @@
 
-### nog aanpassen want dit is van het groepsproject corona!!
 
 import pandas as pd
 import os, sys
@@ -13,5 +12,5 @@ sys.path.append(root_path)
 
 def open_json(path):
     with open(path, "r+") as outfile:
-        json_mean_total_cases = json.load(outfile)
-        return json_mean_total_cases 
+        json = json.load(outfile)
+        return json 
