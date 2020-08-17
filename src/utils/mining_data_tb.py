@@ -107,6 +107,8 @@ def show_duplicates(df):
     else:
         print("\nNo duplicated entries found")
 
+
+# function to update the happiness score with the peace index. Might not be used.
 def change_score_rank(df):
     df["Score"] = df["Score"] - df["Peace index"]
     df["Overall rank"] = df["Score"].rank(ascending=False) 
@@ -114,3 +116,11 @@ def change_score_rank(df):
     df = df.sort_values("Score", ascending=False, inplace=True)
     print("Score and rank updated")
     return df
+
+#Text: Lastly, before continuing with visualizing and studying the data, it is important to take into account that if we want to draw any accurate conlusions regarding the column "World peace index" and its relation to the happiness score, we will need to make sure the happiness score is updated with this information. As the happiness score has been the sum of all the factors in the dataframe, we will need to do the same for this column. However, in this case, as the lowest number in the peace index is the best to have as a country (the most peaceful), we will not add the number to the score, but instead subtract it.
+#applying function to update the happiness score and rank of each dataset.
+#complete_date_2015 = change_score_rank(df=complete_data_2015)
+#complete_date_2016 = change_score_rank(df=complete_data_2016)
+#complete_date_2017 = change_score_rank(df=complete_data_2017)
+#complete_date_2018 = change_score_rank(df=complete_data_2018)
+#complete_date_2019 = change_score_rank(df=complete_data_2019)

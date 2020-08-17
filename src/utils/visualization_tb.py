@@ -34,7 +34,7 @@ def top5_show(df, year):
              color_discrete_sequence=px.colors.qualitative.D3)
     fig.update_layout(barmode='stack', yaxis={'categoryorder':'total ascending'})
 
-    fig.update_traces(texttemplate='%{text:.2s}', 
+    fig.update_traces(texttemplate='%{text:.4s}', 
                   textposition='inside', 
                   marker_line_color='rgb(255,255,255)', 
                   marker_line_width=2.5, 
@@ -66,7 +66,7 @@ def lowest10_show(df):
 
 def score_order_bar(df, year):
     fig = px.bar(df, x=df.index, y='Score',color='Score',height=600)
-    fig.update_layout(title='Countries in order of Happiness Score on {}'.format(year),titlefont_size=20)
+    fig.update_layout(title='Countries in order of Happiness Score in {}'.format(year),titlefont_size=20)
     fig.show()
 
 
@@ -132,4 +132,19 @@ def globe_happiness_score(df):
     fig = go.Figure(data = trace1, layout = layout)
     py.iplot(fig)
 
+def pie(df):
+    pie = px.pie(
+        data_frame=df,
+        values= "time_in_days",
+        names=df.index,
+        color=df.index,
+        hover_name="time_in_days",
+        labels={"time_in_days":"Number of days worked:", "index":"Step:"},
+        title="Distribution of time per step in the project",
+        template="presentation",
+        width=800,
+        height=600,
+        hole=0.3)
 
+    pie.update_traces( marker=dict(line=dict(color="#000000", width=0.5)))
+    
