@@ -10,6 +10,19 @@ from bubbly.bubbly import bubbleplot
 import plotly.offline as py
 from plotly.offline import init_notebook_mode, iplot
 
+import seaborn as sns
+import matplotlib.pyplot  as plt
+import xlrd
+import plotly.offline as py
+from plotly.offline import init_notebook_mode, iplot
+import plotly.express as px
+import plotly.graph_objs as go
+from plotly.offline import plot
+import plotly.io as pio
+from bubbly.bubbly import bubbleplot
+import random
+
+
 os.path.abspath('')
 root_path = os.path.dirname(os.path.abspath(''))
 sys.path.append(root_path)
@@ -135,11 +148,11 @@ def globe_happiness_score(df):
 def pie(df):
     pie = px.pie(
         data_frame=df,
-        values= "time_in_days",
+        values= "time_in_hours",
         names=df.index,
         color=df.index,
-        hover_name="time_in_days",
-        labels={"time_in_days":"Number of days worked:", "index":"Step:"},
+        hover_name="time_in_hours",
+        labels={"time_in_hours":"Number of hours worked:", "index":"Step:"},
         title="Distribution of time per step in the project",
         template="presentation",
         width=800,
@@ -147,4 +160,5 @@ def pie(df):
         hole=0.3)
 
     pie.update_traces( marker=dict(line=dict(color="#000000", width=0.5)))
+    pie.show()
     
