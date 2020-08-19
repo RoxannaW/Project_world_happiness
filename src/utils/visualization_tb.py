@@ -1,15 +1,6 @@
 import os, sys
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot  as plt
 from IPython.display import Image
-import plotly.express as px
-import plotly.graph_objs as go
-from plotly.offline import plot
-from bubbly.bubbly import bubbleplot
-import plotly.offline as py
-from plotly.offline import init_notebook_mode, iplot
-
 import seaborn as sns
 import matplotlib.pyplot  as plt
 import xlrd
@@ -122,6 +113,7 @@ def globe_happiness_score(df):
                locations = df.index,
                text = df.index, 
                z = df["Score"],
+               colorbar=dict(title="Score")
                )]
 
     layout = dict(title = 'Average Happiness Score 2015-2019',
